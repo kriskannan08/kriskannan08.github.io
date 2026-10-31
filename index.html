@@ -3,88 +3,421 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="GoDue helps you organize bills, track payment deadlines and manage recurring expenses.">
-    <title>GoDue – Bill & Payment Tracker</title>
-
-    <style>
-        * {
-            box-sizing: border-box;
+<meta name="description"
+      content="Independent software development focused on building thoughtful applications that simplify everyday life. Explore GoDue, RouteBell and SSL Inspector.">
+<meta name="theme-color" content="#090d0b">
+<title>Kannan R S | Independent Software Developer</title>
+<style>
+    :root {
+        --background: #090d0b;
+        --surface: #111a15;
+        --surface-hover: #17241c;
+        --primary: #00c853;
+        --text: #ffffff;
+        --muted: #a9b5ad;
+        --border: rgba(255, 255, 255, 0.08);
+    }
+    * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+    }
+    html {
+        scroll-behavior: smooth;
+    }
+    body {
+        font-family: -apple-system, BlinkMacSystemFont,
+                     "Segoe UI", sans-serif;
+        background: var(--background);
+        color: var(--text);
+        line-height: 1.6;
+    }
+    a {
+        color: inherit;
+        text-decoration: none;
+    }
+    .container {
+        width: min(1120px, calc(100% - 48px));
+        margin: 0 auto;
+    }
+    /* Navigation */
+    header {
+        border-bottom: 1px solid var(--border);
+    }
+    nav {
+        min-height: 76px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+    .logo {
+        font-size: 21px;
+        font-weight: 750;
+        letter-spacing: -0.7px;
+    }
+    .logo span {
+        color: var(--primary);
+    }
+    .nav-links {
+        display: flex;
+        gap: 30px;
+        color: var(--muted);
+        font-size: 14px;
+    }
+    .nav-links a:hover {
+        color: var(--primary);
+    }
+    /* Hero */
+    .hero {
+        padding: 120px 0 110px;
+        text-align: center;
+    }
+    .eyebrow {
+        display: inline-block;
+        color: var(--primary);
+        background: rgba(0, 200, 83, 0.09);
+        border: 1px solid rgba(0, 200, 83, 0.2);
+        padding: 7px 15px;
+        border-radius: 30px;
+        font-size: 13px;
+        margin-bottom: 28px;
+    }
+    .hero h1 {
+        max-width: 850px;
+        margin: 0 auto;
+        font-size: clamp(40px, 7vw, 72px);
+        line-height: 1.12;
+        letter-spacing: -2.5px;
+    }
+    .hero h1 span {
+        color: var(--primary);
+    }
+    .hero p {
+        max-width: 650px;
+        margin: 26px auto 0;
+        color: var(--muted);
+        font-size: 18px;
+        line-height: 1.8;
+    }
+    .hero-button {
+        display: inline-block;
+        margin-top: 36px;
+        padding: 13px 25px;
+        background: var(--primary);
+        color: #001b0b;
+        border-radius: 10px;
+        font-weight: 650;
+        transition: transform 0.2s, background 0.2s;
+    }
+    .hero-button:hover {
+        background: #00e65f;
+        transform: translateY(-2px);
+    }
+    /* Section */
+    section {
+        padding: 85px 0;
+    }
+    .section-heading {
+        margin-bottom: 42px;
+    }
+    .section-heading .label {
+        color: var(--primary);
+        font-size: 13px;
+        font-weight: 650;
+        text-transform: uppercase;
+        letter-spacing: 1.5px;
+    }
+    .section-heading h2 {
+        font-size: clamp(30px, 5vw, 42px);
+        letter-spacing: -1px;
+        margin-top: 10px;
+    }
+    .section-heading p {
+        color: var(--muted);
+        margin-top: 10px;
+        max-width: 580px;
+    }
+    /* Products */
+    .products-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 22px;
+    }
+    .product-card {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 18px;
+        padding: 30px;
+        transition: transform 0.25s, background 0.25s,
+                    border-color 0.25s;
+    }
+    .product-card:hover {
+        transform: translateY(-5px);
+        background: var(--surface-hover);
+        border-color: rgba(0, 200, 83, 0.3);
+    }
+    .product-icon {
+        width: 54px;
+        height: 54px;
+        display: grid;
+        place-items: center;
+        background: rgba(0, 200, 83, 0.1);
+        border-radius: 14px;
+        color: var(--primary);
+        font-size: 25px;
+        margin-bottom: 25px;
+    }
+    .product-card h3 {
+        font-size: 21px;
+        margin-bottom: 10px;
+    }
+    .product-card p {
+        color: var(--muted);
+        font-size: 14px;
+        min-height: 70px;
+    }
+    .product-link {
+        display: inline-block;
+        margin-top: 22px;
+        color: var(--primary);
+        font-size: 14px;
+        font-weight: 650;
+    }
+    .product-link:hover {
+        text-decoration: underline;
+    }
+    .status {
+        display: inline-block;
+        margin-top: 16px;
+        color: var(--muted);
+        font-size: 12px;
+    }
+    /* About */
+    .about {
+        background: var(--surface);
+        border-top: 1px solid var(--border);
+        border-bottom: 1px solid var(--border);
+    }
+    .about-content {
+        max-width: 760px;
+    }
+    .about-content p {
+        color: var(--muted);
+        font-size: 17px;
+        margin-top: 18px;
+        line-height: 1.9;
+    }
+    /* Contact */
+    .contact {
+        text-align: center;
+    }
+    .contact p {
+        color: var(--muted);
+        margin-top: 14px;
+    }
+    .contact a {
+        color: var(--primary);
+        font-weight: 650;
+    }
+    /* Footer */
+    footer {
+        border-top: 1px solid var(--border);
+        padding: 30px 0;
+        color: #77827b;
+        font-size: 13px;
+    }
+    .footer-content {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 20px;
+    }
+    .footer-links {
+        display: flex;
+        gap: 22px;
+    }
+    .footer-links a:hover {
+        color: var(--primary);
+    }
+    /* Responsive */
+    @media (max-width: 800px) {
+        .products-grid {
+            grid-template-columns: repeat(2, 1fr);
         }
-
-        body {
-            margin: 0;
-            min-height: 100vh;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-            background: #090d0b;
-            color: #ffffff;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 24px;
+        .hero {
+            padding: 90px 0;
         }
-
-        main {
-            max-width: 680px;
+    }
+    @media (max-width: 560px) {
+        .container {
+            width: min(100% - 36px, 1120px);
+        }
+        nav {
+            min-height: 68px;
+        }
+        .nav-links {
+            gap: 15px;
+            font-size: 12px;
+        }
+        .hero {
+            padding: 75px 0;
+        }
+        .hero h1 {
+            letter-spacing: -1.5px;
+        }
+        .hero p {
+            font-size: 16px;
+        }
+        section {
+            padding: 65px 0;
+        }
+        .products-grid {
+            grid-template-columns: 1fr;
+        }
+        .product-card p {
+            min-height: auto;
+        }
+        .footer-content {
+            flex-direction: column;
             text-align: center;
         }
-
-        .brand {
-            color: #00c853;
-            font-size: 48px;
-            font-weight: 750;
-            margin-bottom: 12px;
-        }
-
-        h1 {
-            font-size: clamp(32px, 6vw, 48px);
-            margin: 0 0 16px;
-        }
-
-        p {
-            color: #a9b5ad;
-            font-size: 18px;
-            line-height: 1.7;
-        }
-
-        .button {
-            display: inline-block;
-            margin-top: 24px;
-            padding: 14px 26px;
-            background: #00c853;
-            color: #001b0b;
-            text-decoration: none;
-            font-weight: 650;
-            border-radius: 12px;
-        }
-
-        footer {
-            margin-top: 64px;
-            color: #77827b;
-            font-size: 13px;
-        }
-    </style>
+    }
+</style>
 </head>
-
 <body>
-    <main>
-        <div class="brand">GoDue</div>
-
-        <h1>Stay ahead of every payment.</h1>
-
-        <p>
-            GoDue is a simple bill and payment tracker that helps you
-            organize expenses, remember due dates and manage recurring
-            payments in one place.
-        </p>
-
-        <a class="button"
-           href="https://apps.apple.com/us/app/godue/id6824180958">
-            Get GoDue on the App Store
-        </a>
-
-        <footer>
-            © 2026 Kannan R S. All rights reserved.
-        </footer>
-    </main>
+<header>
+    <div class="container">
+        <nav>
+            <a href="#" class="logo">Kannan<span>.</span></a>
+            <div class="nav-links">
+                <a href="#products">Products</a>
+                <a href="#about">About</a>
+                <a href="#contact">Contact</a>
+            </div>
+        </nav>
+    </div>
+</header>
+<main>
+    <section class="hero">
+        <div class="container">
+            <div class="eyebrow">
+                Independent Software Development
+            </div>
+            <h1>
+                Building useful digital experiences
+                <span>that matter.</span>
+            </h1>
+            <p>
+                Creating thoughtful applications that simplify
+                everyday tasks, solve practical problems and make
+                technology more useful.
+            </p>
+            <a href="#products" class="hero-button">
+                Explore Products
+            </a>
+        </div>
+    </section>
+    <section id="products">
+        <div class="container">
+            <div class="section-heading">
+                <div class="label">What we're building</div>
+                <h2>Our Products</h2>
+                <p>
+                    A growing collection of applications designed
+                    with purpose, simplicity and attention to detail.
+                </p>
+            </div>
+            <div class="products-grid">
+                <article class="product-card">
+                    <div class="product-icon">◷</div>
+                    <h3>GoDue</h3>
+                    <p>
+                        Stay on top of bills and recurring payments.
+                        Organize expenses, track due dates and never
+                        miss an important payment.
+                    </p>
+                    <a class="product-link"
+                       href="https://apps.apple.com/us/app/godue/id6824180958">
+                        View on App Store →
+                    </a>
+                    <div class="status">Available on iOS</div>
+                </article>
+                <article class="product-card">
+                    <div class="product-icon">⌖</div>
+                    <h3>RouteBell</h3>
+                    <p>
+                        A motorcycle navigation companion designed
+                        to bring essential route guidance and useful
+                        ride information closer to the rider.
+                    </p>
+                    <span class="status">In Development</span>
+                </article>
+                <article class="product-card">
+                    <div class="product-icon">⌘</div>
+                    <h3>SSL Inspector</h3>
+                    <p>
+                        Inspect SSL certificates, examine certificate
+                        chains and retrieve public key hashes with
+                        a dedicated macOS utility.
+                    </p>
+                    <span class="status">Available for macOS</span>
+                </article>
+            </div>
+        </div>
+    </section>
+    <section id="about" class="about">
+        <div class="container">
+            <div class="about-content">
+                <div class="section-heading">
+                    <div class="label">A little about us</div>
+                    <h2>Technology with a purpose.</h2>
+                </div>
+                <p>
+                    I'm an independent software developer passionate
+                    about building applications that address real-world
+                    needs.
+                </p>
+                <p>
+                    From everyday productivity tools to specialized
+                    utilities, each project is an opportunity to explore
+                    ideas, solve problems and create experiences that
+                    people genuinely find useful.
+                </p>
+            </div>
+        </div>
+    </section>
+    <section id="contact" class="contact">
+        <div class="container">
+            <div class="section-heading">
+                <div class="label">Get in touch</div>
+                <h2>Have a question?</h2>
+                <p>
+                    For product support, feedback or general enquiries,
+                    we'd be happy to hear from you.
+                </p>
+            </div>
+            <a href="https://kriskannan08.github.io/privacy-policies/godue/support.html">
+                Visit Support →
+            </a>
+        </div>
+    </section>
+</main>
+<footer>
+    <div class="container">
+        <div class="footer-content">
+            <div>
+                © 2026 Kannan R S. All rights reserved.
+            </div>
+            <div class="footer-links">
+                <a href="https://kriskannan08.github.io/privacy-policies/godue/">
+                    Privacy
+                </a>
+                <a href="https://kriskannan08.github.io/privacy-policies/godue/support.html">
+                    Support
+                </a>
+            </div>
+        </div>
+    </div>
+</footer>
 </body>
 </html>
